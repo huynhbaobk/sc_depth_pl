@@ -31,6 +31,9 @@ class SC_DepthV2(LightningModule):
         if self.hparams.hparams.dataset_name == 'nyu':
             training_size = [256, 320]
 
+        elif self.hparams.hparams.dataset_name == 'kitti':
+            training_size = [256, 832] 
+
         # data loader
         normalize = custom_transforms.Normalize(
             mean=[0.45, 0.45, 0.45], std=[0.225, 0.225, 0.225])
@@ -191,7 +194,7 @@ class SC_DepthV2(LightningModule):
         self.log('train/rot_after', rot_after)
 
         # add visualization for rectification
-        if self.global_step % 100 == 0:
+        if self.global_step % 30 == 0:
             vis_img = visualize_image(tgt_img[0])  # (3, H, W)
             vis_ref = visualize_image(ref_imgs[0][0])  # (3, H, W)
             vis_warp = visualize_image(ref_imgs_warped[0][0])  # (3, H, W)

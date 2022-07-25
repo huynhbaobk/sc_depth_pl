@@ -16,6 +16,7 @@ if __name__ == '__main__':
     elif hparams.model_version == 'v2':
         system = SC_DepthV2(hparams)
 
+    save_dir = ""
     logger = TestTubeLogger(
         save_dir="ckpts",
         name=hparams.exp_name,
@@ -45,7 +46,7 @@ if __name__ == '__main__':
                       weights_summary=None,
                       progress_bar_refresh_rate=1,
                       gpus=hparams.num_gpus,
-                      distributed_backend='ddp' if hparams.num_gpus > 1 else None,
+                    #   distributed_backend='ddp' if hparams.num_gpus > 1 else None,
                       benchmark=True
                       )
 
